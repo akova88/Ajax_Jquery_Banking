@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>List Customer</title>
+    <link rel="stylesheet" href="assets/bootstrap/v5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="rounded">
+            <div class="col-lg-6">
+                <h1>List of Customers</h1>
+            </div>
+            <div class=" header-right-button col-lg-6">
+                <a href="#">
+                    <button class="btn btn-outline-light">
+                        <i class="fas fa-history"></i>
+                        Transfer history
+                    </button>
+                </a>
+
+                <button class="btn btn-outline-light" data-bs-toggle="modal"
+                    data-bs-target="#modalCreate">
+                    <i class="fas fa-user-plus"></i> Add new Customer
+                </button>
+
+
+
+            </div>
+        </header>
+        <div class="content">
+            <table class="table table-hover" id="tbCustomer">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th>FullName</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Phone</th>
+                        <th>Address</th>
+                        <th class="text-end">Balance</th>
+                        <th colspan="5" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <th:block th:each="item: ${customers}">
+                        <tr>
+                            <td th:text="${item.id}" class="text-center"></td>
+                            <td th:text="${item.fullName}"></td>
+                            <td th:text="${item.email}" class="text-center"></td>
+                            <td th:text="${item.phone}" class="text-center"></td>
+                            <td th:text="${item.address}"></td>
+                            <td th:text="${item.balance}" class="text-end"></td>
+                            <td class="text-center">
+                                <a th:href="@{/customers/edit/__${item.id}__}">
+                                    <button class="btn btn-outline-secondary">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                </a>
+
+                                <a th:href="@{/customers/deposit/__${item.id}__}">
+                                    <button class="btn btn-outline-success">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </a>
+
+                                <a th:href="@{/customers/withdraws/__${item.id}__}">
+                                    <button class="btn btn-outline-warning">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </a>
+
+                                <a th:href="@{/customers/transfer/__${item.id}__}">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </a>
+
+                                <a th:href="@{/customers/delete/__${item.id}__}">
+                                    <button class="btn btn-outline-danger"
+                                        onclick="return confirm('Are you sure? delete')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal Create-->
+    <div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Modal Create</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form method="post">
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="fullName">Full name</label>
+                                <input type="text" class="form-control" id="fullNameCre">
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="email">Email</label>
+                                <input type="email" class="form-control" id="emailCre">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="phone">Phone</label>
+                                <input type="tel" class="form-control" id="phoneCre">
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="address">Address</label>
+                                <input type="text" class="form-control" id="addressCre">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnCreate">
+                        <i class="fas fa-plus"></i>
+                        Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Update-->
+    <div class="modal fade" id="modalUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Modal Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form method="post">
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="fullName">Full name</label>
+                                <input type="text" class="form-control" id="fullNameUp">
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="email">Email</label>
+                                <input type="email" class="form-control" id="emailUp">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="phone">Phone</label>
+                                <input type="tel" class="form-control" id="phoneUp">
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="address">Address</label>
+                                <input type="text" class="form-control" id="addressUp">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate">
+                        <i class="fas fa-pencil-alt"></i>
+                        Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Deposit-->
+    <div class="modal fade" id="modalDeposit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Modal Deposit</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Customer ID</label>
+                                <input type="text" class="form-control" id="idDeps" readonly>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Full name</label>
+                                <input type="text" class="form-control" id="fullNameDeps" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Current balance ($)</label>
+                                <input type="text" class="form-control" id="balanceDeps" readonly>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Transaction Amount ($)</label>
+                                <input type="text" class="form-control" id="transactionAmount">
+                                <div class="text-danger" id="errorDeps"></div>
+                                <div class="text-success" id="successDeps"></div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveDeposit">
+                        <i class="fas fa-plus"></i>
+                        Deposit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Withdraw-->
+    <div class="modal fade" id="modalWithdraw" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Modal Withdraw</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Customer ID</label>
+                                <input type="text" class="form-control" id="idWdr" readonly>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Full name</label>
+                                <input type="text" class="form-control" id="fullNameWdr" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Current balance ($)</label>
+                                <input type="text" class="form-control" id="balanceWdr" readonly>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Transaction Amount ($)</label>
+                                <input type="text" class="form-control" id="transactionAmountWdr">
+                                <div class="text-danger" id="errorWdr"></div>
+                                <div class="text-success" id="successWdr"></div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveWithdraw">
+                        <i class="fas fa-plus"></i>
+                        Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/jquery-3.7.0.min.js"></script>
+    <script src="assets/bootstrap/v5.3.0/js/bootstrap.bundle.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+
+
+    </script>
+</body>
+
+</html>
