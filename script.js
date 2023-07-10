@@ -123,13 +123,13 @@ page.commands.getAllCustomers = () => {
     })
 }
 
-function handleAddAllEvent(){
-    handleAddEventShowUpdate();
-    handleAddEventShowDeposit();
-    handleAddEventShowWithdraw();
-    handleAddEventShowTransfer();
-    handleAddEventRemove()
-}
+// function handleAddAllEvent(){
+//     handleAddEventShowUpdate();
+//     handleAddEventShowDeposit();
+//     handleAddEventShowWithdraw();
+//     handleAddEventShowTransfer();
+//     handleAddEventRemove()
+// }
 
 // bắt sự kiện nhấn vô nút create
 
@@ -210,6 +210,7 @@ page.dialogs.commands.update = (obj) => {
             const str = page.commands.renderCustomes(data);
             const currentRow = $('#tr_'+customerId);
             currentRow.replaceWith(str);
+            App.showSuccessAlert("Update thành công!")
             page.dialogs.elements.modalUpdate.modal('hide');
             // handleAddAllEvent();
         })
