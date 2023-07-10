@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./assets/bootstrap/v5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="./style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./assets/sweetalert2/v11.7.12/sweetalert2.min.css">
 </head>
 
 <body>
@@ -23,8 +23,7 @@
                     </button>
                 </a>
 
-                <button class="btn btn-outline-light" data-bs-toggle="modal"
-                    data-bs-target="#modalCreate">
+                <button class="btn btn-outline-light" id="btnCreateShowModal">
                     <i class="fas fa-user-plus"></i> Add new Customer
                 </button>
 
@@ -269,21 +268,80 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="btnSaveWithdraw">
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-minus"></i>
                         Withdraw</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal Transfer-->
+    <div class="modal fade" id="modalTransfer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Modal Transfer</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-lg-3 mb-3">
+                                <label class="fw-bold">Sender ID</label>
+                                <input type="text" class="form-control" id="idSender" readonly>
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <label class="fw-bold">Sender name</label>
+                                <input type="text" class="form-control" id="fullNameSender" readonly>
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <label class="fw-bold">Email</label>
+                                <input type="text" class="form-control" id="emailSender" readonly>
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <label class="fw-bold">Sender balance ($)</label>
+                                <input type="text" class="form-control" id="balanceSender" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label class="form-label">Recipient Name</label>
+                                <select class="form-select form-control" id="recipientTrf"></select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Transfer Amount ($)</label>
+                                <input type="text" class="form-control" id="transferMoney">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Fees (%)</label>
+                                <input type="text" class="form-control" value="10" readonly>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Transaction Amount</label>
+                                <input type="text" class="form-control" readonly id="total">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveTransfer">
+                        <i class="fas fa-exchange-alt"></i>
+                        Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="./assets/jquery-3.7.0.min.js"></script>
     <script src="./assets/bootstrap/v5.3.0/js/bootstrap.bundle.js"></script>
+    <script src="./assets/sweetalert2/v11.7.12/sweetalert2.all.min.js"></script>
+    <script src="./app.js"></script>
     <script src="./script.js"></script>
-    
-    <script>
-
-
-    </script>
 </body>
 
 </html>
